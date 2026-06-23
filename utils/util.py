@@ -5,7 +5,7 @@ import yaml
 import os
 import logging
 import torchvision.transforms as transforms
-from models.HDE_CSR_Net import HDE_CSR_Net
+from models.HDFR_Net import HDFR_Net
 
 
 def mkdir(path):
@@ -84,7 +84,7 @@ def dataset_path(args):
 
 
 def load_model(args):
-    model = HDE_CSR_Net(args=args)
+    model = HDFR_Net(args=args)
 
     return model
 
@@ -105,8 +105,9 @@ def get_save_path(args):
         path = os.path.join(path, 'tiered_meta_iNat')
     elif args.dataset == 'aircraft':
         path = os.path.join(path, 'Aircraft_fewshot')
+    
 
-    detail_path = 'MDF_Net'
+    detail_path = 'HDFR_Net'
 
     detail_path = detail_path.replace("/", "_")
     path = os.path.join(path, detail_path)
@@ -116,7 +117,7 @@ def get_save_path(args):
     else:
         backbone_path = 'Conv-4' + '_' + str(args.train_shot) + '-shot'
     path = os.path.join(path, backbone_path)
-
+    
     return path
 
 
@@ -137,7 +138,7 @@ def load_resume_point(args, model):
 
 
 def load_pretrained_model(args):
-    model = HDE_CSR_Net(args=args)
+    model = HDFR_Net(args=args)
 
     if args.resnet:
         load_path = os.path.join(args.save_path, 'model_ResNet-12.pth')

@@ -1,5 +1,5 @@
 from functools import partial
-from trainers import HDE_CSR_train
+from trainers import HDFR_Net_train
 from trainers import trainer
 from datasets import dataloaders
 from utils.util import *
@@ -19,7 +19,7 @@ train_loader = dataloaders.\
 
 args.save_folder = get_save_path(args)
 
-train_func = partial(HDE_CSR_train.default_train, train_loader=train_loader)
+train_func = partial(HDFR_Net_train.default_train, train_loader=train_loader)
 tm = trainer.Train_Manager(args, path_manager=pm, train_func=train_func)
 
 model = load_model(args)
